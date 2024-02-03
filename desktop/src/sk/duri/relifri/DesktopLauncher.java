@@ -8,8 +8,10 @@ import sk.duri.relifri.Game;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setForegroundFPS(60);
 		config.setTitle("Relifri");
+		config.setWindowedMode(700, 700);
+		config.useVsync(true);
+		config.setForegroundFPS(60);
 		new Lwjgl3Application(new Game(), config);
 	}
 }
