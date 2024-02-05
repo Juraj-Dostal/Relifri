@@ -16,7 +16,7 @@ public class Hrac extends Postava{
 
     @Override
     public boolean uberZivot(int sila) {
-        int bool = (int) Math.round(Math.random());
+        int bool = (int) Math.round(Math.random()) * 3;
 
         if (bool == 0) {
             this.setZivoty(this.getZivoty() - sila);

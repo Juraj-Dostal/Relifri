@@ -4,8 +4,8 @@ public class Jarda extends Postava {
     public Jarda() {
         super("Jarda", "jarda.png", 183, 87);
         this.setPolohu(450, 350);
-        this.setSila(30);
-        this.setZivoty(3500);
+        this.setSila(3);
+        this.setZivoty(20);
     }
 
     @Override
@@ -15,7 +15,8 @@ public class Jarda extends Postava {
 
     @Override
     public boolean uberZivot(int sila) {
-        int bool = (int) Math.round(Math.random() * 30);
+
+        int bool = (int) Math.round(Math.random() );
 
         if (bool == 0) {
             this.setZivoty(this.getZivoty() - sila);
