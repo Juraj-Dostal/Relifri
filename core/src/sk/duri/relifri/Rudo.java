@@ -3,9 +3,9 @@ package sk.duri.relifri;
 public class Rudo extends Postava {
     public Rudo() {
         super("Rudo", "rudo.png", 125, 148);
-        this.setPolohu(450, 350);
-        this.setSila(5);
-        this.setZivoty(19);
+        this.setPolohu(260, 550);
+        this.setSila(10);
+        this.setZivoty(18);
     }
 
     @Override
@@ -15,6 +15,7 @@ public class Rudo extends Postava {
 
     @Override
     public boolean uberZivot(int sila) {
-        return false;
+        this.setZivoty(this.getZivoty() - sila);
+        return true;
     }
 }

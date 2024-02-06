@@ -33,81 +33,91 @@ public class Game extends ApplicationAdapter {
 
 		pozadie = new Texture(Gdx.files.internal("miestnost.png"));
 		hrac = new Hrac();
-		prisera = new Jarda();
+		prisera = dajPriseru();
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
 
-		camera.update();
-		batch.setProjectionMatrix(camera.combined);
+		this.camera.update();
+		this.batch.setProjectionMatrix(camera.combined);
 		/**
 		 * Renderovanie grafiky
 		 */
-		batch.begin();
-		batch.draw(this.pozadie, 0, 0);
-		batch.draw(hrac.getTextura(), this.hrac.getX(), this.hrac.getY());
-		if (this.prisera != null) {
-			batch.draw(prisera.getTextura(), this.prisera.getX(), this.prisera.getY());
+		this.batch.begin();
+		this.batch.draw(this.pozadie, 0, 0);
+		if (this.hrac != null) {
+			this.batch.draw(this.hrac.getTextura(), this.hrac.getX(), this.hrac.getY());
+			this.font.draw(batch, "Zivoty hrac: " + this.hrac.getZivoty(), 580,40 );
 		}
-		font.draw(batch, "Zivoty prisera: " + this.prisera.getZivoty(), 580,20 );
-		font.draw(batch, "Zivoty hrac: " + this.hrac.getZivoty(), 580,40 );
-		batch.end();
+		if (this.prisera != null) {
+			this.batch.draw(this.prisera.getTextura(), this.prisera.getX(), this.prisera.getY());
+			this.font.draw(batch, "Zivoty prisera: " + this.prisera.getZivoty(), 580,20 );
+		}
+
+		this.batch.end();
 
 
 		/**
 		 * Riesenie pohybu hraca
 		 */
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
-			hrac.setX(hrac.getX() - 200*Gdx.graphics.getDeltaTime());
-			if (hrac.getX() < 0) hrac.setX(0);
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
-			hrac.setX(hrac.getX() + 200*Gdx.graphics.getDeltaTime());
-			if (hrac.getX() > 700 - hrac.getWidth()) hrac.setX(700 - hrac.getWidth());
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
-			hrac.setY(hrac.getY() - 200*Gdx.graphics.getDeltaTime());
-			if (hrac.getY() < 0) hrac.setY(0);
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
-			hrac.setY(hrac.getY() + 200*Gdx.graphics.getDeltaTime());
-			if (hrac.getY() > 700 - hrac.getHeight()) hrac.setY(700 - hrac.getHeight());
-		}
-
-		/**
-		 * Riesenie utoku
-		 */
-
-		if (this.prisera != null && this.hrac.getHitbox().overlaps(this.prisera.getHitbox())) {
-
-		}
-
-		if (Gdx.input.isTouched()) {
-			Vector2 rozsah = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-
-			if (prisera.getHitbox().contains(rozsah)) {
-				this.prisera.uberZivot(hrac.getSila());
-			} else {
-				this.hrac.uberZivot(prisera.getSila());
+		if (this.hrac != null) {
+			if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
+				this.hrac.setX(this.hrac.getX() - 200 * Gdx.graphics.getDeltaTime());
+				if (this.hrac.getX() < 0) this.hrac.setX(0);
 			}
-		}
+			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+				this.hrac.setX(this.hrac.getX() + 200 * Gdx.graphics.getDeltaTime());
+				if (this.hrac.getX() > 700 - this.hrac.getWidth()) this.hrac.setX(700 - this.hrac.getWidth());
+			}
+			if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
+				this.hrac.setY(this.hrac.getY() - 200 * Gdx.graphics.getDeltaTime());
+				if (this.hrac.getY() < 0) this.hrac.setY(0);
+			}
+			if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
+				this.hrac.setY(this.hrac.getY() + 200 * Gdx.graphics.getDeltaTime());
+				if (this.hrac.getY() > 700 - this.hrac.getHeight()) this.hrac.setY(700 - this.hrac.getHeight());
+			}
 
-		if (!this.isSent && this.prisera.isDead()) {
-			posliSpravu( this.prisera.getName() + " zomrel! Vyhral si!!!");
-			this.prisera = zmenPriseru(this.prisera.getName());
-		}
+			/**
+			 * Riesenie utoku, blizky a daleky
+			 */
 
-		if (!this.isSent && this.hrac.isDead()) {
-			posliSpravu(this.prisera.getName() + " ta zabil! Hra skoncila!!!");
+			if (this.prisera != null && this.hrac.getHitbox().overlaps(this.prisera.getHitbox())) {
+				this.prisera.uberZivot(hrac.getSila() / 2);
+			}
+
+			if (Gdx.input.isTouched()) {
+				Rectangle rozsah = new Rectangle(Gdx.input.getX() - 25, Gdx.input.getY() - 25, 50, 50);
+
+				if (this.prisera.getHitbox().contains(rozsah)) {
+					this.prisera.uberZivot(hrac.getSila());
+				} else {
+					this.hrac.uberZivot(prisera.getSila());
+				}
+			}
+
+			if (!this.isSent && this.prisera.isDead()) {
+				this.prisera.getTextura().dispose();
+				this.prisera = dajPriseru();
+				posliSpravu(this.prisera.getName() + " zomrel! Vyhral si!!!");
+				reset();
+			}
+
+			if (!this.isSent && this.hrac.isDead()) {
+				this.hrac = null;
+				posliSpravu(this.prisera.getName() + " ta zabil! Hra skoncila!!!");
+			}
 		}
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		hrac.getTextura().dispose();
+		if (this.hrac != null) {
+			hrac.getTextura().dispose();
+		}
 		if (this.prisera != null) {
 			prisera.getTextura().dispose();
 		}
@@ -126,29 +136,22 @@ public class Game extends ApplicationAdapter {
 	/**
 	 * Metoda zmeny priseru hracovi
 	 *
-	 * @param nazovPriseri
 	 * @return
 	 */
-	private Postava zmenPriseru (String nazovPriseri) {
-		int rand = (int)Math.random();
-		if (nazovPriseri.equals("jarda")) {
-			switch (rand) {
-				case 0: return new Rudo();
-				case 1: return new Smiecho();
-			}
-		} else if (nazovPriseri.equals("rudo")) {
-			switch (rand) {
-				case 0: return new Jarda();
-				case 1: return new Smiecho();
-			}
-		} else {
-			switch (rand) {
-				case 0: return new Rudo();
-				case 1: return new Jarda();
-			}
+	private Postava dajPriseru () {
+		int rand = (int)(Math.random() * 3);
+
+		switch (rand) {
+			case 0: return new Rudo();
+			case 1: return new Smiecho();
+			default: return new Jarda();
 		}
+	}
 
-		return null;
-
+	/**
+	 * Vyresetuje nastavenia
+	 */
+	private void reset() {
+		this.isSent = false;
 	}
 }

@@ -4,8 +4,8 @@ public class Jarda extends Postava {
     public Jarda() {
         super("Jarda", "jarda.png", 183, 87);
         this.setPolohu(450, 350);
-        this.setSila(3);
-        this.setZivoty(20);
+        this.setSila(5);
+        this.setZivoty(47);
     }
 
     @Override
@@ -15,14 +15,16 @@ public class Jarda extends Postava {
 
     @Override
     public boolean uberZivot(int sila) {
+        this.setZivoty(this.getZivoty() - sila);
+        return true;
 
-        int bool = (int) Math.round(Math.random() );
-
-        if (bool == 0) {
-            this.setZivoty(this.getZivoty() - sila);
-            return true;
-        } else {
-            return false;
-        }
+//        int bool = (int) Math.round(Math.random() );
+//
+//        if (bool == 0) {
+//            this.setZivoty(this.getZivoty() - sila);
+//            return true;
+//        } else {
+//            return false;
+//        }
     }
 }

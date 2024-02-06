@@ -6,7 +6,7 @@ _______
 
 Život studenta na fakulte riadenia a informatiky.
 Hra je na typ Dungeons. 
-Kde ako príšery sú učitelia a cieľom je ziskať titul.
+Kde su príšery a cieľom je ziskať titul.
 Výber príšer mal by byť nahodný a aj každa hra.
 
 _______

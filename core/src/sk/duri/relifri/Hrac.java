@@ -6,7 +6,7 @@ public class Hrac extends Postava{
         super("Frickar", "fris.png", 150, 75);
         this.setPolohu(150, 150);
         this.setSila(10);
-        this.setZivoty(100);
+        this.setZivoty(1000);
     }
 
     @Override
@@ -16,14 +16,16 @@ public class Hrac extends Postava{
 
     @Override
     public boolean uberZivot(int sila) {
-        int bool = (int) Math.round(Math.random()) * 3;
-
-        if (bool == 0) {
-            this.setZivoty(this.getZivoty() - sila);
-            return true;
-        } else {
-            return false;
-        }
+        this.setZivoty(this.getZivoty() - sila);
+        return true;
+//      int bool = (int) (Math.random() * 3);
+//
+//      if (bool == 0) {
+//          this.setZivoty(this.getZivoty() - sila);
+//          return true;
+//      } else {
+//          return false;
+//      }
 
     }
 

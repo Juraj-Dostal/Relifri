@@ -61,7 +61,7 @@ public abstract class Postava {
     public void setPolohu(float x, float y) {
         this.x = x;
         this.y = y;
-        this.hitbox.setPosition(x ,y);
+        this.hitbox.setPosition(this.x ,this.y);
     }
 
     public Rectangle getHitbox() {

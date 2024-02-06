@@ -3,9 +3,9 @@ package sk.duri.relifri;
 public class Smiecho extends Postava {
     public Smiecho() {
         super("Smiecho", "smiecho.png", 115, 150);
-        this.setPolohu(450, 350);
-        this.setSila(1);
-        this.setZivoty(47);
+        this.setPolohu(150, 50);
+        this.setSila(2);
+        this.setZivoty(87);
     }
 
     @Override
