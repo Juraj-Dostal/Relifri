@@ -1,11 +1,12 @@
 package sk.duri.relifri;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Postava {
-
     private String name;
     private float x;
     private float y;
@@ -16,10 +17,10 @@ public abstract class Postava {
     private int zivoty;
     private int sila;
 
-    public Postava() {
-    }
+//    public Postava() {
+//    }
 
-    public Postava(String name, String cesta, int height, int width ) {
+    public Postava(String name, String cesta, int height, int width) {
         this.name = name;
         this.textura = new Texture(Gdx.files.internal(cesta));
         this.height = height;
@@ -61,7 +62,7 @@ public abstract class Postava {
     public void setPolohu(float x, float y) {
         this.x = x;
         this.y = y;
-        this.hitbox.setPosition(this.x ,this.y);
+        this.hitbox.setPosition(this.x, this.y);
     }
 
     public Rectangle getHitbox() {
@@ -95,4 +96,6 @@ public abstract class Postava {
     public Texture getTextura() {
         return textura;
     }
+
+
 }

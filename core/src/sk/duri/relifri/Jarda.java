@@ -2,8 +2,8 @@ package sk.duri.relifri;
 
 public class Jarda extends Postava {
     public Jarda() {
-        super("Jarda", "jarda.png", 183, 87);
-        this.setPolohu(450, 350);
+        super( "Jarda", "jarda.png", 183, 87);
+        this.setPolohu(480, 190);
         this.setSila(5);
         this.setZivoty(47);
     }

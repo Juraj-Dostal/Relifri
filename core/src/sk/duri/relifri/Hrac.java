@@ -1,10 +1,13 @@
 package sk.duri.relifri;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+
 public class Hrac extends Postava{
 
-    public Hrac() {
+    public Hrac(final RelifriGame game) {
         super("Frickar", "fris.png", 150, 75);
-        this.setPolohu(150, 150);
+        this.setPolohu(250, 250);
         this.setSila(10);
         this.setZivoty(1000);
     }

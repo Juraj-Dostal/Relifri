@@ -2,7 +2,7 @@ package sk.duri.relifri;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import sk.duri.relifri.Game;
+import sk.duri.relifri.RelifriGame;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
@@ -12,6 +12,6 @@ public class DesktopLauncher {
 		config.setWindowedMode(700, 700);
 		config.useVsync(true);
 		config.setForegroundFPS(60);
-		new Lwjgl3Application(new Game(), config);
+		new Lwjgl3Application(new RelifriGame(), config);
 	}
 }
